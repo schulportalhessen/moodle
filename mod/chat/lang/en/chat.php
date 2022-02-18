@@ -22,6 +22,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+$string['allowinnewchatneverdeletemessages'] = 'Able to choose "never delete sessions"';
 $string['activityoverview'] = 'You have upcoming chat sessions';
 $string['ajax'] = 'Version using AJAX';
 $string['autoscroll'] = 'Auto scroll';
@@ -29,6 +30,7 @@ $string['beep'] = 'Beep';
 $string['bubble'] = 'Bubble';
 $string['cantlogin'] = 'Could not log in to chat room!!';
 $string['composemessage'] = 'Compose a message';
+$string['configallowinnewchatneverdeletemessages'] = 'When activated the time a chatsession is stored can be set to "never delete" which means, that until course is deleted or the chat is reset the sessions will be stored.';
 $string['configmethod'] = 'The AJAX chat method provide an AJAX-based chat interface which contacts the server regularly for updates. The normal chat method involves clients regularly contacting the server for updates. It requires no configuration and works everywhere, but can create a large load on the server if many users are chatting.  Using a server daemon requires shell access to Unix, but it results in a fast scalable chat environment.';
 $string['confignormalupdatemode'] = 'Chatroom updates are normally served efficiently using the <em>Keep-Alive</em> feature of HTTP 1.1, but this is still quite heavy on the server. A more advanced method is to use the <em>Stream</em> strategy to feed updates to the users. Using <em>Stream</em> scales much better (similar to the chatd method) but may not be supported by your server.';
 $string['configoldping'] = 'What is the maximum time that may pass before we detect that a user has disconnected (in seconds)? This is just an upper limit, as usually disconnects are detected very quickly. Lower values will be more demanding on your server. If you are using the normal method, <strong>never</strong> set this lower than 2 * chat_refresh_room.';
@@ -43,6 +45,8 @@ $string['coursetheme'] = 'Course theme';
 $string['crontask'] = 'Background processing for chat module';
 $string['currentchats'] = 'Active chat sessions';
 $string['currentusers'] = 'Current users';
+$string['defaultkeeptime'] = 'Default keeptime';
+$string['configdefaultkeeptime'] = 'Default time when creating a chat the chat messages are stored.';
 $string['deletesession'] = 'Delete this session';
 $string['deletesessionsure'] = 'Are you sure you want to delete this session?';
 $string['donotusechattime'] = 'Don\'t publish any chat times';
@@ -94,6 +98,10 @@ $string['methoddaemon'] = 'Chat server daemon';
 $string['methodnormal'] = 'Normal';
 $string['methodajax'] = 'AJAX';
 $string['modulename'] = 'Chat';
+$string['moduledescription'] = 'Allgemeine Chat-Beschreibung';
+$string['configmoduledescription'] = 'Der hier angegebene Text wird in allen Chats als allgemeiner Hinweis zur Chatnutzung angezeigt.';
+$string['moduledescriptiondefault'] = 'Protokollierte Chats: Alle Chatnachrichten werden im Rahmen des pädagogischen Einsatzes protokolliert und können (immer) durch Lehrkräfte und je nach Konfiguration auch durch Lernende eingesehen werden.';
+
 $string['modulename_help'] = 'The chat activity module enables participants to have text-based, real-time synchronous discussions.
 
 The chat may be a one-time activity or it may be repeated at the same time each day or each week. Chat sessions are saved and can be made available for everyone to view or restricted to users with the capability to view chat session logs.
@@ -108,7 +116,7 @@ Chats are especially useful when the group chatting is not able to meet face-to-
 * Sessions to help students prepare for tests where the teacher, or other students, would pose sample questions';
 $string['modulename_link'] = 'mod/chat/view';
 $string['modulenameplural'] = 'Chats';
-$string['neverdeletemessages'] = 'Never delete messages';
+$string['neverdeletemessages'] = 'Never delete messages (messages are stored until coursedeletion or coursereset)';
 $string['nextsession'] = 'Next scheduled session';
 $string['no_complete_sessions_found'] = 'No complete sessions found.';
 $string['noguests'] = 'The chat is not open to guests';

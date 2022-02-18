@@ -125,6 +125,12 @@ if (has_capability('mod/chat:chat', $context)) {
         echo get_string('sessionstart', 'chat', $chatinfo);
         echo '</p>';
     }
+    
+    $chatmoduledescription = '';
+    if ( isset( $CFG->chat_moduledescription )) {
+        $chatmoduledescription = $CFG->chat_moduledescription;
+    }
+    echo '<div class="alert alert-primary  moduledescription">' . $chatmoduledescription . '</div>';
 
     $params['id'] = $chat->id;
     $chattarget = new moodle_url("/mod/chat/gui_$CFG->chat_method/index.php", $params);

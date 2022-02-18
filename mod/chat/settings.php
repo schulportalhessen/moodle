@@ -33,6 +33,37 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('chat_old_ping', get_string('oldping', 'chat'),
                        get_string('configoldping', 'chat'), 35, PARAM_INT));
 
+    $moduledescriptiondefault = get_string('moduledescriptiondefault', 'chat');
+    $settings->add(new admin_setting_configtextarea('chat_moduledescription',
+                        get_string('moduledescription', 'chat'),
+                        get_string('configmoduledescription', 'chat'),
+                        "$moduledescriptiondefault",
+                        PARAM_RAW));
+                      
+    $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
+                        get_string('allowinnewchatneverdeletemessages', 'chat'),
+                        get_string('configallowinnewchatneverdeletemessages', 'chat'),
+                        0));
+
+    $options = array();
+    $options['0'] = 'bis zum Zurücksetzen oder Löschen des Kurses';
+    $options['365'] = '365';
+    $options['180'] = '180';
+    $options['150'] = '150';
+    $options['120'] = '120';
+    $options['90'] = '90';
+    $options['60'] = '60';
+    $options['30'] = '30';
+    $options['21'] = '21';
+    $options['14'] = '14';
+    $options['7'] = '7';
+    $options['2'] = '2';
+    $settings->add(new admin_setting_configselect('chat_default_keeptime',
+                                                get_string('defaultkeeptime', 'chat'),
+                                                get_string('configdefaultkeeptime', 'chat'),
+                                                '30',
+                                                $options));             
+
     $settings->add(new admin_setting_heading('chat_normal_heading', get_string('methodnormal', 'chat'),
                        get_string('explainmethodnormal', 'chat')));
 

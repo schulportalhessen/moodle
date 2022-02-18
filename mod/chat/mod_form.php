@@ -56,7 +56,13 @@ class mod_chat_mod_form extends moodleform_mod {
         $mform->addElement('select', 'schedule', get_string('repeattimes', 'chat'), $options);
 
         $options = array();
-        $options[0]    = get_string('neverdeletemessages', 'chat');
+        if (isset($CFG->chat_allowinnewchat_neverdeletemessages)) {
+            $chat_allowinnewchat_neverdeletemessages = $CFG->chat_allowinnewchat_neverdeletemessages;
+        }
+        if ($chat_allowinnewchat_neverdeletemessages) {
+            $options[0] = get_string('neverdeletemessages', 'chat'); // never means until coursedeletion or reset of course - chat
+        }
+
         $options[365]  = get_string('numdays', '', 365);
         $options[180]  = get_string('numdays', '', 180);
         $options[150]  = get_string('numdays', '', 150);
@@ -69,6 +75,13 @@ class mod_chat_mod_form extends moodleform_mod {
         $options[7]    = get_string('numdays', '', 7);
         $options[2]    = get_string('numdays', '', 2);
         $mform->addElement('select', 'keepdays', get_string('savemessages', 'chat'), $options);
+
+        $chat_default_keeptime = '5';
+        if (!empty($CFG->chat_default_keeptime)) {
+            $chat_default_keeptime = $CFG->chat_default_keeptime;
+        }
+
+        $mform->setDefault('keepdays', $chat_default_keeptime); 
 
         $mform->addElement('selectyesno', 'studentlogs', get_string('studentseereports', 'chat'));
         $mform->addHelpButton('studentlogs', 'studentseereports', 'chat');
