@@ -98,9 +98,9 @@ $string['methoddaemon'] = 'Chat server daemon';
 $string['methodnormal'] = 'Normal';
 $string['methodajax'] = 'AJAX';
 $string['modulename'] = 'Chat';
-$string['moduledescription'] = 'Allgemeine Chat-Beschreibung';
-$string['configmoduledescription'] = 'Der hier angegebene Text wird in allen Chats als allgemeiner Hinweis zur Chatnutzung angezeigt.';
-$string['moduledescriptiondefault'] = 'Protokollierte Chats: Alle Chatnachrichten werden im Rahmen des pädagogischen Einsatzes protokolliert und können (immer) durch Lehrkräfte und je nach Konfiguration auch durch Lernende eingesehen werden.';
+$string['moduledescription'] = 'chatdescription in all chats';
+$string['configmoduledescription'] = 'This text is shown in every chat as additional description and can not be deleted. The text contains information about the usage of the chat and the created protocols of the sessions.';
+$string['moduledescriptiondefault'] = 'Protcol-information: Every chatsession is stored and can be seen for padagogical purpose by a teacher or if configured by the other participants or studends auf the course.';
 
 $string['modulename_help'] = 'The chat activity module enables participants to have text-based, real-time synchronous discussions.
 
