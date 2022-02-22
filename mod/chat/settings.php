@@ -33,10 +33,10 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configtext('chat_old_ping', get_string('oldping', 'chat'),
                        get_string('configoldping', 'chat'), 35, PARAM_INT));
 
-    $settings->add(new admin_setting_configcheckbox('chat_studentlogs_default',
-                        get_string('studentlogsdefault', 'chat'),
-                        get_string('configstudentlogsdefault', 'chat'),
-                        0));
+    $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
+                       get_string('allowinnewchatneverdeletemessages', 'chat'),
+                       get_string('configallowinnewchatneverdeletemessages', 'chat'),
+                       0));
 
     $options = array();
     $options['0'] = 'bis zum Zurücksetzen oder Löschen des Kurses';
@@ -57,9 +57,9 @@ if ($ADMIN->fulltree) {
                                                 '30',
                                                 $options));
                                                 
-    $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
-                        get_string('allowinnewchatneverdeletemessages', 'chat'),
-                        get_string('configallowinnewchatneverdeletemessages', 'chat'),
+    $settings->add(new admin_setting_configcheckbox('chat_studentlogs_default',
+                        get_string('studentlogsdefault', 'chat'),
+                        get_string('configstudentlogsdefault', 'chat'),
                         0));
 
     $settings->add(new admin_setting_heading('chat_normal_heading', get_string('methodnormal', 'chat'),
