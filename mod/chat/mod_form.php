@@ -84,6 +84,14 @@ class mod_chat_mod_form extends moodleform_mod {
         $mform->setDefault('keepdays', $chat_default_keeptime); 
 
         $mform->addElement('selectyesno', 'studentlogs', get_string('studentseereports', 'chat'));
+
+        $studentlogsdefault = false;
+        if (!empty($CFG->chat_studentlogs_default)) {
+            $studentlogsdefault = $CFG->chat_studentlogs_default;
+        }
+
+        $mform->setDefault('studentlogs', $studentlogsdefault); 
+
         $mform->addHelpButton('studentlogs', 'studentseereports', 'chat');
 
         $this->standard_coursemodule_elements();

@@ -32,17 +32,15 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('chat_old_ping', get_string('oldping', 'chat'),
                        get_string('configoldping', 'chat'), 35, PARAM_INT));
-
-    $moduledescriptiondefault = get_string('moduledescriptiondefault', 'chat');
-    $settings->add(new admin_setting_configtextarea('chat_moduledescription',
-                        get_string('moduledescription', 'chat'),
-                        get_string('configmoduledescription', 'chat'),
-                        "$moduledescriptiondefault",
-                        PARAM_RAW));
                       
     $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
                         get_string('allowinnewchatneverdeletemessages', 'chat'),
                         get_string('configallowinnewchatneverdeletemessages', 'chat'),
+                        0));
+
+    $settings->add(new admin_setting_configcheckbox('chat_studentlogs_default',
+                        get_string('studentlogsdefault', 'chat'),
+                        get_string('configstudentlogsdefault', 'chat'),
                         0));
 
     $options = array();

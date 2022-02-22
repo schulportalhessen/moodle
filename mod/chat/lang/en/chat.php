@@ -29,6 +29,7 @@ $string['autoscroll'] = 'Auto scroll';
 $string['beep'] = 'Beep';
 $string['bubble'] = 'Bubble';
 $string['cantlogin'] = 'Could not log in to chat room!!';
+$string['chatmoduledescription'] = 'This text is shown in every chat as additional description and can not be deleted. The text contains information about the usage of the chat and the created protocols of the sessions.';
 $string['composemessage'] = 'Compose a message';
 $string['configallowinnewchatneverdeletemessages'] = 'When activated the time a chatsession is stored can be set to "never delete" which means, that until course is deleted or the chat is reset the sessions will be stored.';
 $string['configmethod'] = 'The AJAX chat method provide an AJAX-based chat interface which contacts the server regularly for updates. The normal chat method involves clients regularly contacting the server for updates. It requires no configuration and works everywhere, but can create a large load on the server if many users are chatting.  Using a server daemon requires shell access to Unix, but it results in a fast scalable chat environment.';
@@ -40,6 +41,7 @@ $string['configserverhost'] = 'The hostname of the computer where the server dae
 $string['configserverip'] = 'The numerical IP address that matches the above hostname';
 $string['configservermax'] = 'Max number of clients allowed';
 $string['configserverport'] = 'Port to use on the server for the daemon';
+$string['configstudentlogsdefault'] = 'If activated new chatlogs are visible to all courseparticipants.';
 $string['compact'] = 'Compact';
 $string['coursetheme'] = 'Course theme';
 $string['crontask'] = 'Background processing for chat module';
@@ -98,10 +100,6 @@ $string['methoddaemon'] = 'Chat server daemon';
 $string['methodnormal'] = 'Normal';
 $string['methodajax'] = 'AJAX';
 $string['modulename'] = 'Chat';
-$string['moduledescription'] = 'chatdescription in all chats';
-$string['configmoduledescription'] = 'This text is shown in every chat as additional description and can not be deleted. The text contains information about the usage of the chat and the created protocols of the sessions.';
-$string['moduledescriptiondefault'] = 'Protcol-information: Every chatsession is stored and can be seen for padagogical purpose by a teacher or if configured by the other participants or studends auf the course.';
-
 $string['modulename_help'] = 'The chat activity module enables participants to have text-based, real-time synchronous discussions.
 
 The chat may be a one-time activity or it may be repeated at the same time each day or each week. Chat sessions are saved and can be made available for everyone to view or restricted to users with the capability to view chat session logs.
@@ -167,6 +165,7 @@ $string['serverport'] = 'Server port';
 $string['sessions'] = 'Chat sessions';
 $string['sessionstart'] = 'The next chat session will start on {$a->date}, ({$a->fromnow} from now)';
 $string['strftimemessage'] = '%H:%M';
+$string['studentlogsdefault'] = 'Default studentlogs visible';
 $string['studentseereports'] = 'Everyone can view past sessions';
 $string['studentseereports_help'] = 'If set to No, only users have mod/chat:readlog capability are able to see the chat logs';
 $string['talk'] = 'Talk';

@@ -126,10 +126,7 @@ if (has_capability('mod/chat:chat', $context)) {
         echo '</p>';
     }
     
-    $chatmoduledescription = '';
-    if (isset($CFG->chat_moduledescription)) {
-        $chatmoduledescription = $CFG->chat_moduledescription;
-    }
+    $chatmoduledescription = get_string('chatmoduledescription', 'chat');
     echo '<div class="alert alert-primary moduledescription">' . $chatmoduledescription . '</div>';
 
     $params['id'] = $chat->id;
