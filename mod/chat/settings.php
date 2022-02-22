@@ -32,11 +32,6 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configtext('chat_old_ping', get_string('oldping', 'chat'),
                        get_string('configoldping', 'chat'), 35, PARAM_INT));
-                      
-    $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
-                        get_string('allowinnewchatneverdeletemessages', 'chat'),
-                        get_string('configallowinnewchatneverdeletemessages', 'chat'),
-                        0));
 
     $settings->add(new admin_setting_configcheckbox('chat_studentlogs_default',
                         get_string('studentlogsdefault', 'chat'),
@@ -60,7 +55,12 @@ if ($ADMIN->fulltree) {
                                                 get_string('defaultkeeptime', 'chat'),
                                                 get_string('configdefaultkeeptime', 'chat'),
                                                 '30',
-                                                $options));             
+                                                $options));
+                                                
+    $settings->add(new admin_setting_configcheckbox('chat_allowinnewchat_neverdeletemessages',
+                        get_string('allowinnewchatneverdeletemessages', 'chat'),
+                        get_string('configallowinnewchatneverdeletemessages', 'chat'),
+                        0));
 
     $settings->add(new admin_setting_heading('chat_normal_heading', get_string('methodnormal', 'chat'),
                        get_string('explainmethodnormal', 'chat')));
