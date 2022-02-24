@@ -47,7 +47,7 @@ $string['chatreport'] = 'Chat-Sitzungen';
 $string['chattime'] = 'Nächster Chat';
 $string['compact'] = 'Kompakt';
 $string['composemessage'] = 'Mitteilung schreiben';
-$string['configallowinnewchatneverdeletemessages'] = 'Wenn aktiviert dann kann beim Anlegen eines Chat die Speicherdauer auf "Niemals löschen" eingestellt werden, so dass die Protokolle bis zum Löschen eines Kurses, der Chataktivität oder dem Zurpücksetzen des Kurses aufbewahrt werden.';
+$string['configallowinnewchatneverdeletemessages'] = 'Wenn aktiviert, dann kann beim Anlegen eines Chat die Speicherdauer auf "Niemals löschen" eingestellt werden, so dass die Protokolle bis zum Zurücksetzen des Kurses, dem Löschen der Chat-Aktivität oder dem Löschen des Kurses aufbewahrt werden.';
 $string['configdefaultkeeptime'] = 'Beim Anlegen eines Chats wird dieser Wert als Voreinstellung für die Speicherdauer der Chatprotokolle (in Tagen) angegeben.';
 $string['configmethod'] = 'Die Chat-Methode AJAX bietet eine AJAX-basierte Chat-Oberfläche, die den Server regelmäßig kontaktiert, um Aktualisierungen zu erhalten. Bei der Chat-Methode Normal wenden sich Clients regelmäßig an den Server, um Aktualisierungen zu erhalten. Es erfordert keine Konfiguration und funktioniert überall, kann jedoch eine große Belastung des Servers verursachen, wenn viele Nutzer/innen chatten. Die Verwendung eines Server-Daemons erfordert Shell-Zugriff auf Unix, führt jedoch zu einer schnell skalierbaren Chat-Umgebung.';
 $string['confignormalupdatemode'] = 'Chat-Aktualisierungen arbeiten normalerweise mit dem Modus <em>KeepAlive</em> von HTTP 1.1, was aber den Server sehr stark beansprucht. Eine andere Variante nutzt den Modus <em>Stream</em> zur Aktualisierung der Anzeige. <em>Stream</em> arbeitet wesentlich besser (ähnlich wie chatd), aber eventuell unterstützt Ihr Server diese Methode nicht.';
@@ -116,7 +116,7 @@ Chats sind besonders nützlich, wenn die Gruppe sich nicht persönlich treffen k
 * Eine Frage- und Antwortsitzung mit einem eingeladenen Redner an einem anderen Ort
 * Sitzungen zur Unterstützung der Teilnehmer/innen bei der Vorbereitung auf Tests, bei denen die/der Trainer/in oder andere Teilnehmer/innen Beispielfragen stellen würden';
 $string['modulenameplural'] = 'Chats';
-$string['neverdeletemessages'] = 'Nie löschen';
+$string['neverdeletemessages'] = 'Nie löschen (Nachrichten bis zum Zurücksetzen oder Löschen des Kurses aufbewahren)';
 $string['nextsession'] = 'Nächste Sitzung';
 $string['no_complete_sessions_found'] = 'Keine beendete Sitzung gefunden';
 $string['nochat'] = 'Kein Chat gefunden';
