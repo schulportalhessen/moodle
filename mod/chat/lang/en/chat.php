@@ -114,7 +114,7 @@ Chats are especially useful when the group chatting is not able to meet face-to-
 * Sessions to help students prepare for tests where the teacher, or other students, would pose sample questions';
 $string['modulename_link'] = 'mod/chat/view';
 $string['modulenameplural'] = 'Chats';
-$string['neverdeletemessages'] = 'Never delete messages (messages are stored until coursedeletion or coursereset)';
+$string['neverdeletemessages'] = 'Never delete messages (until reset/delete course)';
 $string['nextsession'] = 'Next scheduled session';
 $string['no_complete_sessions_found'] = 'No complete sessions found.';
 $string['noguests'] = 'The chat is not open to guests';

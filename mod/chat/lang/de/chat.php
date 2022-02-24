@@ -116,7 +116,7 @@ Chats sind besonders nützlich, wenn die Gruppe sich nicht persönlich treffen k
 * Eine Frage- und Antwortsitzung mit einem eingeladenen Redner an einem anderen Ort
 * Sitzungen zur Unterstützung der Teilnehmer/innen bei der Vorbereitung auf Tests, bei denen die/der Trainer/in oder andere Teilnehmer/innen Beispielfragen stellen würden';
 $string['modulenameplural'] = 'Chats';
-$string['neverdeletemessages'] = 'Nie löschen (Nachrichten bis zum Zurücksetzen oder Löschen des Kurses aufbewahren)';
+$string['neverdeletemessages'] = 'Nie löschen (bis zum Zurücksetzen/Löschen des Kurses aufbewahren)';
 $string['nextsession'] = 'Nächste Sitzung';
 $string['no_complete_sessions_found'] = 'Keine beendete Sitzung gefunden';
 $string['nochat'] = 'Kein Chat gefunden';
