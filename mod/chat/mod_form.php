@@ -60,7 +60,7 @@ class mod_chat_mod_form extends moodleform_mod {
             $chat_allowinnewchat_neverdeletemessages = $CFG->chat_allowinnewchat_neverdeletemessages;
         }
         if ($chat_allowinnewchat_neverdeletemessages) {
-            $options[0] = get_string('neverdeletemessages', 'chat'); // never means until coursedeletion or reset of course - chat
+            $options[0] = get_string('neverdeletechatmessages', 'chat'); // never means until coursedeletion or reset of course - chat
         }
 
         $options[365]  = get_string('numdays', '', 365);

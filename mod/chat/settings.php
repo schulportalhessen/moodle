@@ -39,7 +39,7 @@ if ($ADMIN->fulltree) {
                        0));
 
     $options = array();
-    $options['0'] = get_string('neverdeletemessages', 'chat'); 
+    $options['0'] = get_string('neverdeletechatmessages', 'chat'); 
     $options['365'] = '365';
     $options['180'] = '180';
     $options['150'] = '150';
