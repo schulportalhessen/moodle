@@ -126,8 +126,14 @@ if (has_capability('mod/chat:chat', $context)) {
         echo '</p>';
     }
     
+    
     $chatmoduledescription = get_string('chatmoduledescription', 'chat');
-    echo '<div class="alert alert-primary moduledescription">' . $chatmoduledescription . '</div>';
+
+    $keepdaysinfo = get_string('numdays', '', $chat->keepdays);
+    if ($chat->keepdays === "0") {
+        $keepdaysinfo = get_string('neverdeletechatmessages', 'chat');
+    }
+    echo '<div class="alert alert-primary chatmoduledescription">' . $chatmoduledescription . $keepdaysinfo . '</div>';
 
     $params['id'] = $chat->id;
     $chattarget = new moodle_url("/mod/chat/gui_$CFG->chat_method/index.php", $params);

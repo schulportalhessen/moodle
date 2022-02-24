@@ -32,7 +32,7 @@ $string['autoscroll'] = 'Automatisch scrollen';
 $string['beep'] = 'Beep';
 $string['bubble'] = 'Bubble';
 $string['cantlogin'] = 'Anmeldung im Chat fehlgeschlagen!!';
-$string['chatmoduledescription'] = 'Protokollierte Chats: Alle Chatnachrichten werden im Rahmen des pädagogischen Einsatzes protokolliert und können (immer) durch Lehrkräfte und je nach Konfiguration auch durch Lernende eingesehen werden.';
+$string['chatmoduledescription'] = 'Protokollierte Chats - Alle Chatnachrichten werden im Rahmen des pädagogischen Einsatzes protokolliert und können (immer) durch Lehrkräfte und je nach Konfiguration auch durch Lernende eingesehen werden. Speicherdauer: ';
 $string['chat:addinstance'] = 'Neuen Chat hinzufügen';
 $string['chat:chat'] = 'Chat betreten';
 $string['chat:deletelog'] = 'Chat-Logdaten löschen';
@@ -117,7 +117,7 @@ Chats sind besonders nützlich, wenn die Gruppe sich nicht persönlich treffen k
 * Sitzungen zur Unterstützung der Teilnehmer/innen bei der Vorbereitung auf Tests, bei denen die/der Trainer/in oder andere Teilnehmer/innen Beispielfragen stellen würden';
 $string['modulenameplural'] = 'Chats';
 $string['neverdeletemessages'] = 'Nie löschen';
-$string['neverdeletechatmessages'] = 'Nie löschen (bis zum Zurücksetzen/Löschen des Kurses aufbewahren)';
+$string['neverdeletechatmessages'] = 'Nie löschen, also bis zum Zurücksetzen/Löschen des Kurses aufbewahrt';
 $string['nextsession'] = 'Nächste Sitzung';
 $string['no_complete_sessions_found'] = 'Keine beendete Sitzung gefunden';
 $string['nochat'] = 'Kein Chat gefunden';

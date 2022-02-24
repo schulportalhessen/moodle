@@ -29,7 +29,7 @@ $string['autoscroll'] = 'Auto scroll';
 $string['beep'] = 'Beep';
 $string['bubble'] = 'Bubble';
 $string['cantlogin'] = 'Could not log in to chat room!!';
-$string['chatmoduledescription'] = 'All messages are stored and can be accessed by the teacher or if configured by other participants.';
+$string['chatmoduledescription'] = 'All messages are stored and can be accessed by the teacher or if configured by other participants. Storage period: ';
 $string['composemessage'] = 'Compose a message';
 $string['configallowinnewchatneverdeletemessages'] = 'When activated the time a chatsession is stored can be set to "never delete" which means, that until course is deleted or the chat is reset the sessions will be stored.';
 $string['configmethod'] = 'The AJAX chat method provide an AJAX-based chat interface which contacts the server regularly for updates. The normal chat method involves clients regularly contacting the server for updates. It requires no configuration and works everywhere, but can create a large load on the server if many users are chatting.  Using a server daemon requires shell access to Unix, but it results in a fast scalable chat environment.';
@@ -115,7 +115,7 @@ Chats are especially useful when the group chatting is not able to meet face-to-
 $string['modulename_link'] = 'mod/chat/view';
 $string['modulenameplural'] = 'Chats';
 $string['neverdeletemessages'] = 'Never delete messages';
-$string['neverdeletechatmessages'] = 'Never delete messages (until reset/delete course)';
+$string['neverdeletechatmessages'] = 'Never delete messages until reset/delete course';
 $string['nextsession'] = 'Next scheduled session';
 $string['no_complete_sessions_found'] = 'No complete sessions found.';
 $string['noguests'] = 'The chat is not open to guests';
