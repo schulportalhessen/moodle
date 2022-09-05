@@ -609,8 +609,6 @@ class pdf extends TcpdfFpdi {
      * @return  string path to copy or converted pdf (false == fail)
      */
     public static function ensure_pdf_file_compatible($tempsrc) {
-        global $CFG;
-
         $pdf = new pdf();
         $pagecount = 0;
         try {
@@ -619,20 +617,15 @@ class pdf extends TcpdfFpdi {
             // PDF was not valid - try running it through ghostscript to clean it up.
             $pagecount = 0;
         }
-        $pdf->Close(); // PDF loaded and never saved/outputted needs to be closed.
-
-        if ($pagecount > 0) {
+        $temparea = make_request_directory();
+        $tempdst = $temparea . "/target.pdf";
+        $tempdstarg = \escapeshellarg($tempdst);
+        $tempsrcarg = \escapeshellarg($tempsrc);
+        $command = self::get_gs_command_for_pdf($pdf, $pagecount, $tempsrcarg, $tempdstarg);
+        if ($command === "") {
             // PDF is already valid and can be read by tcpdf.
             return $tempsrc;
         }
-
-        $temparea = make_request_directory();
-        $tempdst = $temparea . "/target.pdf";
-
-        $gsexec = \escapeshellarg($CFG->pathtogs);
-        $tempdstarg = \escapeshellarg($tempdst);
-        $tempsrcarg = \escapeshellarg($tempsrc);
-        $command = "$gsexec -q -sDEVICE=pdfwrite -dSAFER -dBATCH -dNOPAUSE -sOutputFile=$tempdstarg $tempsrcarg";
         exec($command);
         if (!file_exists($tempdst)) {
             // Something has gone wrong in the conversion.
@@ -647,14 +640,44 @@ class pdf extends TcpdfFpdi {
             // PDF was not valid - try running it through ghostscript to clean it up.
             $pagecount = 0;
         }
-        $pdf->Close(); // PDF loaded and never saved/outputted needs to be closed.
 
+        $pdf->Close(); // PDF loaded and never saved/outputted needs to be closed.
         if ($pagecount <= 0) {
             // Could not parse the converted pdf.
             return false;
         }
 
         return $tempdst;
+    }
+
+    /**
+     * Gets the ghostscript (gs) command to use to convert or flatten a pdf.
+     *
+     * @param pdf $pdf
+     * @param int $pagecount
+     * @param string $tempsrcarg temp source directory for source.pdf
+     * @param string $tempdstarg temp target directory for target.pdf
+     * @return string
+     * @throws \dml_exception
+     */
+    public static function get_gs_command_for_pdf(pdf $pdf, int $pagecount, string $tempsrcarg, string $tempdstarg) {
+        global $CFG;
+        $outputdevice = "pdfwrite"; // This is our default.
+        $jpgq = get_config('assignfeedback_editpdf', 'jpegq');
+        $resolution = get_config('assignfeedback_editpdf', 'resolution');
+        // Check for annotations and force flattening.
+        if ($pagecount <= get_config('assignfeedback_editpdf', 'flatten')) {
+            $outputdevice = "pdfimage24 -sCompression=JPEG -dJPEGQ=$jpgq -r$resolution";
+            $pagecount = 0;
+        }
+        $pdf->Close(); // PDF loaded and never saved/outputted needs to be closed.
+        if ($pagecount > 0) {
+            // PDF is already valid and can be read by tcpdf.
+            return "";
+        }
+        $gsexec = \escapeshellarg($CFG->pathtogs);
+        return "$gsexec -q -sDEVICE=$outputdevice -dSAFER -dBATCH -dNOPAUSE -dPDFSETTINGS=/screen " .
+            "-sOutputFile=$tempdstarg $tempsrcarg";
     }
 
     /**
@@ -780,12 +803,14 @@ class pdf extends TcpdfFpdi {
         $template = $this->importPage($this->currentpage);
         $size = $this->getTemplateSize($template);
 
+        $orientation = 'P';
         if ($imageinfo["width"] > $imageinfo["height"]) {
             if ($size['width'] < $size['height']) {
                 $temp = $size['width'];
                 $size['width'] = $size['height'];
                 $size['height'] = $temp;
             }
+            $orientation = 'L';
         } else if ($imageinfo["width"] < $imageinfo["height"]) {
             if ($size['width'] > $size['height']) {
                 $temp = $size['width'];
@@ -793,17 +818,14 @@ class pdf extends TcpdfFpdi {
                 $size['height'] = $temp;
             }
         }
-        $orientation = $size['orientation'];
         $this->SetHeaderMargin(0);
         $this->SetFooterMargin(0);
         $this->SetMargins(0, 0, 0, true);
         $this->setPrintFooter(false);
         $this->setPrintHeader(false);
-
         $this->AddPage($orientation, $size);
         $this->SetAutoPageBreak(false, 0);
-        $this->Image('@' . $imagecontent, 0, 0, $size['w'], $size['h'],
+        $this->Image('@' . $imagecontent, 0, 0, $size['width'], $size['height'],
             '', '', '', false, null, '', false, false, 0);
     }
 }
-
