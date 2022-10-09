@@ -456,4 +456,45 @@ class assign_feedback_editpdf extends assign_feedback_plugin {
     public function get_config_for_external() {
         return (array) $this->get_config();
     }
+
+    /**
+     * Get the default setting for feedback editpdf plugin
+     *
+     * @param MoodleQuickForm $mform The form to add elements to
+     * @return void
+     */
+    public function get_settings(MoodleQuickForm $mform) {
+        $infotextifnotstored = '';
+        $flattenpdfenabled = $this->get_config('flattenpdfenabled');
+        if ($flattenpdfenabled === false) {
+            $mform->addElement('hidden', 'assignfeedback_editpdf_flattenpdfenabled_stored_value', 'false');
+            $infotextifnotstored = get_string('flattenpdfenablednotset', 'assignfeedback_editpdf');
+            $flattenpdfenabled = get_config('assignfeedback_editpdf', 'flattenpdfenableddefault');
+        }
+        $mform->addElement('selectyesno',
+            'assignfeedback_editpdf_flattenpdfenabled',
+            get_string('flattenpdfenabled', 'assignfeedback_editpdf') . $infotextifnotstored);
+        $mform->addHelpButton('assignfeedback_editpdf_flattenpdfenabled',
+            'flattenpdfenabled', 'assignfeedback_editpdf');
+        $mform->setDefault('assignfeedback_editpdf_flattenpdfenabled', $flattenpdfenabled);
+        // Hide if editpdf feedback plugin is disabled.
+        $mform->hideIf('assignfeedback_editpdf_flattenpdfenabled',
+            'assignfeedback_editpdf_enabled', 'notchecked');
+        // Disable if iseditable is set to no.
+        $mform->addElement('hidden', 'assignfeedback_editpdf_flattenpdfenableddefault_iseditable',
+            get_config('assignfeedback_editpdf', 'flattenpdfenableddefault_iseditable'));
+        $mform->disabledIf('assignfeedback_editpdf_flattenpdfenabled',
+            'assignfeedback_editpdf_flattenpdfenableddefault_iseditable', 'neq', "1");
+    }
+    /**
+     * Save the settings for feedback editpdf plugin
+     *
+     * @param stdClass $data
+     * @return bool
+     */
+    public function save_settings(stdClass $data) {
+        $this->set_config('flattenpdfenabled', !empty($data->assignfeedback_editpdf_flattenpdfenabled));
+        return true;
+    }
+
 }

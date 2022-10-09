@@ -230,13 +230,13 @@ class combined_document {
      * Combine all source files into a single PDF and store it in the
      * file_storage API using the supplied contextid and itemid.
      *
+     * @param   int|\assign $assignment
      * @param   int $contextid The contextid for the file to be stored under
      * @param   int $itemid The itemid for the file to be stored under
      * @return  $this
      */
-    public function combine_files($contextid, $itemid) {
+    public function combine_files($assignment, $contextid, $itemid) {
         global $CFG;
-
         $currentstatus = $this->get_status();
         $readystatuslist = [self::STATUS_READY, self::STATUS_READY_PARTIAL];
         if ($currentstatus === self::STATUS_FAILED) {
@@ -266,10 +266,10 @@ class combined_document {
             if (is_a($file, \core_files\conversion::class)) {
                 $status = $file->get('status');
                 if ($status == \core_files\conversion::STATUS_COMPLETE) {
-                    $compatiblepdf = pdf::ensure_pdf_compatible($file->get_destfile());
+                    $compatiblepdf = pdf::ensure_pdf_compatible($file->get_destfile(), $assignment);
                 }
             } else {
-                $compatiblepdf = pdf::ensure_pdf_compatible($file);
+                $compatiblepdf = pdf::ensure_pdf_compatible($file, $assignment);
             }
 
             if ($compatiblepdf) {
