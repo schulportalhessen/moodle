@@ -430,3 +430,8 @@ ul.assignfeedback_editpdf_menu {
         padding-right: 5px;
     }
 }
+
+#fitem_id_assignfeedback_editpdf_flattenpdfenabled {
+    border: solid 1px #ccc;
+    padding: 10px;
+}
