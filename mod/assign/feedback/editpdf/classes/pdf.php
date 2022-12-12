@@ -634,28 +634,27 @@ class pdf extends TcpdfFpdi {
      * Check to see if PDF is version 1.4 (or below); if not: use ghostscript to convert it
      *
      * @param stored_file $file
+     * @param int|\assign $assignment The assignment where the file is used.
      * @return string path to copy or converted pdf (false == fail)
      */
-    public static function ensure_pdf_compatible(\stored_file $file) {
-        global $CFG;
+    public static function ensure_pdf_compatible(\stored_file $file, $assignment) {
 
         // Copy the stored_file to local disk for checking.
         $temparea = make_request_directory();
         $tempsrc = $temparea . "/source.pdf";
         $file->copy_content_to($tempsrc);
 
-        return self::ensure_pdf_file_compatible($tempsrc);
+        return self::ensure_pdf_file_compatible($tempsrc, $assignment);
     }
 
     /**
      * Check to see if PDF is version 1.4 (or below); if not: use ghostscript to convert it
      *
      * @param   string $tempsrc The path to the file on disk.
+     * @param int|\assign $assignment The assignment where the file is used.
      * @return  string path to copy or converted pdf (false == fail)
      */
-    public static function ensure_pdf_file_compatible($tempsrc) {
-        global $CFG;
-
+    public static function ensure_pdf_file_compatible($tempsrc, $assignment) {
         $pdf = new pdf();
         $pagecount = 0;
         try {
@@ -664,20 +663,24 @@ class pdf extends TcpdfFpdi {
             // PDF was not valid - try running it through ghostscript to clean it up.
             $pagecount = 0;
         }
-        $pdf->Close(); // PDF loaded and never saved/outputted needs to be closed.
-
-        if ($pagecount > 0) {
-            // PDF is already valid and can be read by tcpdf.
+        // Check the assigment-setting for flattening.
+        $feedbackplugin = $assignment->get_feedback_plugin_by_type("editpdf");
+        $flattenpdfenabled = $feedbackplugin->get_config('flattenpdfenabled');
+        // Old assignments do not have $flattenpdfenabled setting, so get_config returns false in this case.
+        if ($flattenpdfenabled === false ) {
+            $flattenpdfenabled = get_config('assignfeedback_editpdf', 'forceflattenoldassigments');
+        }
+        $pdfshouldbeflattend = $flattenpdfenabled && $pagecount <= get_config('assignfeedback_editpdf', 'maxpagetoflatten');
+        if ($pagecount > 0 && !$pdfshouldbeflattend) {
+            // PDF is already valid and can be read by tcpdf. It should not be flattend, or it is an older assignment.
             return $tempsrc;
         }
-
+        // PDF is not valid or it should be flattend.
         $temparea = make_request_directory();
         $tempdst = $temparea . "/target.pdf";
-
-        $gsexec = \escapeshellarg($CFG->pathtogs);
         $tempdstarg = \escapeshellarg($tempdst);
         $tempsrcarg = \escapeshellarg($tempsrc);
-        $command = "$gsexec -q -sDEVICE=pdfwrite -dSAFER -dBATCH -dNOPAUSE -sOutputFile=$tempdstarg $tempsrcarg";
+        $command = self::get_gs_command_for_pdf($tempsrcarg, $tempdstarg, $pdfshouldbeflattend);
         exec($command);
         if (!file_exists($tempdst)) {
             // Something has gone wrong in the conversion.
@@ -700,6 +703,30 @@ class pdf extends TcpdfFpdi {
         }
 
         return $tempdst;
+    }
+
+    /**
+     * Gets the ghostscript (gs) command to use to convert or flatten a pdf.
+     *
+     * @param string $tempsrcarg temp source directory for source.pdf
+     * @param string $tempdstarg temp target directory for target.pdf
+     * @param bool $pdfshouldbeflattend inticates if the pdf has to be flattend or just hast do be converted the "old" way
+     * @return string
+     * @throws \dml_exception
+     */
+    public static function get_gs_command_for_pdf(string $tempsrcarg, string $tempdstarg, bool $pdfshouldbeflattend) {
+        global $CFG;
+        $PDFSETTINGS = get_config('assignfeedback_editpdf', 'pdfsettings');
+        //$jpgq = get_config('assignfeedback_editpdf', 'jpegq');
+        //$resolution = get_config('assignfeedback_editpdf', 'resolution');
+        if (false) {
+            //$outputdevice = "pdfimage24 -sCompression=JPEG -dJPEGQ=$jpgq -r$resolution";
+            $outputdevice = "pdfwrite -dSAFER -dBATCH -dNOPAUSE -dPDFSETTINGS=/$PDFSETTINGS -dPreserveAnnots=false ";
+        } else {
+            $outputdevice = "pdfwrite -dSAFER -dBATCH -dNOPAUSE -dPDFSETTINGS=/$PDFSETTINGS ";
+        }
+        $gsexec = \escapeshellarg($CFG->pathtogs);
+        return "$gsexec -q -sDEVICE=$outputdevice -sOutputFile=$tempdstarg $tempsrcarg";
     }
 
     /**
@@ -852,4 +879,3 @@ class pdf extends TcpdfFpdi {
             '', '', '', false, null, '', false, false, 0);
     }
 }
-

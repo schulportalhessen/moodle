@@ -29,6 +29,15 @@ $settings->add(new admin_setting_configcheckbox('assignfeedback_editpdf/default'
                    new lang_string('default', 'assignfeedback_editpdf'),
                    new lang_string('default_help', 'assignfeedback_editpdf'), 1));
 
+$options = array('screen' => 'screen 72 dpi images', 'ebook' => 'ebook 150 dpi images', 'printer' => 'printer 300 dpi images', 'prepress' => 'prepress 300 dpi images, color preserving');
+$settings->add(new admin_setting_configselect(
+    'assignfeedback_editpdf/pdfsettings',
+    get_string('pdfsettings', 'assignfeedback_editpdf'),
+    get_string('configpdfsettings', 'assignfeedback_editpdf'),
+    'screen',
+    $options
+));
+
 // Stamp files setting.
 $name = 'assignfeedback_editpdf/stamps';
 $title = get_string('stamps','assignfeedback_editpdf');
@@ -37,6 +46,28 @@ $description = get_string('stampsdesc', 'assignfeedback_editpdf');
 $setting = new admin_setting_configstoredfile($name, $title, $description, 'stamps', 0,
     array('maxfiles' => 8, 'accepted_types' => array('image')));
 $settings->add($setting);
+
+// Note that large pdfs are very slow and annotations go missing in big files.
+$settings->add(new admin_setting_heading('limitations',
+    get_string('limitations', 'assignfeedback_editpdf'),
+    get_string('largedocs', 'assignfeedback_editpdf')));
+
+// Allow admin to determine up to which pagesize we want to flatten all files.
+$settings->add(new admin_setting_configtext('assignfeedback_editpdf/maxpagetoflatten',
+                   new lang_string('maxpagetoflatten', 'assignfeedback_editpdf'),
+                   new lang_string('maxpagetoflatten_help', 'assignfeedback_editpdf'), 10, PARAM_INT));
+
+$settings->add(new admin_setting_configcheckbox('assignfeedback_editpdf/flattenpdfenableddefault',
+    new lang_string('flattenpdfenableddefault', 'assignfeedback_editpdf'),
+    new lang_string('configflattenpdfenableddefault', 'assignfeedback_editpdf'), 1));
+
+$settings->add(new admin_setting_configcheckbox('assignfeedback_editpdf/flattenpdfenableddefault_iseditable',
+    new lang_string('flattenpdfenableddefault_iseditable', 'assignfeedback_editpdf'),
+    new lang_string('configflattenpdfenableddefault_iseditable', 'assignfeedback_editpdf'), 1));
+
+$settings->add(new admin_setting_configcheckbox('assignfeedback_editpdf/forceflattenoldassigments',
+    new lang_string('forceflattenoldassigments', 'assignfeedback_editpdf'),
+    new lang_string('configforceflattenoldassigments', 'assignfeedback_editpdf'), 1));
 
 // Ghostscript setting.
 $systempathslink = new moodle_url('/admin/settings.php', array('section' => 'systempaths'));

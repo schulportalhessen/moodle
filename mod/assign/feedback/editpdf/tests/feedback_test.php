@@ -554,4 +554,31 @@ class feedback_test extends \advanced_testcase {
         // Confirm, that 100 records were processed and 10 were left for the next task run.
         $this->assertEquals(10, $DB->count_records('assignfeedback_editpdf_queue'));
     }
+
+    /**
+     * Test Convert get_gs_command_for_pdf()
+     *
+     * @covers \assignfeedback_editpdf\pdf
+     */
+    public function test_get_gs_command_for_pdf() {
+        global $CFG;
+        $this->require_ghostscript();
+        $this->resetAfterTest();
+        $gsexec = \escapeshellarg($CFG->pathtogs);
+        $tempsrcarg = "/tmp/source";
+        $tempdstarg = "/tmp/destination";
+        $PDFSETTINGS = 'screen';
+
+        $pdfshouldbeflattend = false;
+        $expectedvalue = "$gsexec -q -sDEVICE=pdfwrite -dSAFER -dBATCH -dNOPAUSE -dPDFSETTINGS=/$PDFSETTINGS " .
+            "-sOutputFile=$tempdstarg $tempsrcarg";
+        $this->assertEquals($expectedvalue,
+            \assignfeedback_editpdf\pdf::get_gs_command_for_pdf($tempsrcarg, $tempdstarg, $pdfshouldbeflattend));
+
+        $pdfshouldbeflattend = true;
+        $expectedvalue = "$gsexec -q -sDEVICE=pdfwrite -dSAFER -dBATCH -dNOPAUSE -dPDFSETTINGS=/$PDFSETTINGS -dPreserveAnnots=false " .
+            "-sOutputFile=$tempdstarg $tempsrcarg";
+        $this->assertEquals($expectedvalue,
+            \assignfeedback_editpdf\pdf::get_gs_command_for_pdf($tempsrcarg, $tempdstarg, $pdfshouldbeflattend));
+    }
 }

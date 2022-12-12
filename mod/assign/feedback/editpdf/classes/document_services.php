@@ -334,14 +334,13 @@ EOD;
      */
     public static function get_combined_pdf_for_attempt($assignment, $userid, $attemptnumber) {
         $document = self::get_combined_document_for_attempt($assignment, $userid, $attemptnumber);
-
         if ($document->get_status() === combined_document::STATUS_COMPLETE) {
             // The combined document is already ready.
             return $document;
         } else {
-            // Attempt to combined the files in the document.
+            // Attempt to combine the files in the document.
             $grade = $assignment->get_user_grade($userid, true, $attemptnumber);
-            $document->combine_files($assignment->get_context()->id, $grade->id);
+            $document->combine_files($assignment, $assignment->get_context()->id, $grade->id);
             return $document;
         }
     }
